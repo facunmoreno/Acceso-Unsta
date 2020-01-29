@@ -2,8 +2,6 @@ const express = require('express');
 const app = express();
 require('express-async-errors');
 
-
-
 require('./startup/db')();
 require('./startup/error-log')();
 require('./startup/validation')();
