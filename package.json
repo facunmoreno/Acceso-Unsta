@@ -17,6 +17,7 @@
     "helmet": "^3.21.2",
     "joi-objectid": "^3.0.1",
     "mongoose": "^5.8.10",
+    "qrcode": "^1.4.4",
     "winston": "^3.2.1",
     "winston-mongodb": "^5.0.1"
   }

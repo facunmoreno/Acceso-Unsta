@@ -17,7 +17,7 @@ const schema = mongoose.Schema({
         enum: ['Alumno', 'Profesor'],
         required: true,
     }
-});
+}, { _id: false });
 
 function validatePerson(person){
     let schema = Joi.object({
