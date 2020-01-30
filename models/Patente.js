@@ -7,7 +7,7 @@ const patenteSchema = mongoose.Schema({
         type: String,
         maxLength: 9,
         minLength: 7,
-        unique: true,
+        uppercase: true,
         required: true
     },
     person: personSchema
@@ -74,3 +74,4 @@ function isLetter(n) {
 
 module.exports.Patente = Patente;
 module.exports.validatePatente = validatePatente;
+module.exports.patenteSchema = patenteSchema;

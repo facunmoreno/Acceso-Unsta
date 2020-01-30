@@ -10,7 +10,9 @@ const schema = mongoose.Schema({
     code: {
         type: String,
         maxLength: 255,
-        required: true,
+        unique: true,
+        lowercase: true,
+        required: true
     },
     type: {
         type: String,

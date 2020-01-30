@@ -2,6 +2,12 @@ const express = require('express');
 const router = express.Router();
 const { Patente, validatePatente } = require('../models/Patente');
 
+router.get('/:code', async (req, res) => {
+    let patentes = await Patente.find({ 'person.code': req.params.code });
+    if(patentes.length == 0) return res.send('No hay patentes cargadas.');
+
+    res.send(patentes);
+});
 
 router.post('/', async (req, res) => {
     let { error } = validatePatente(req.body);
@@ -27,6 +33,10 @@ router.post('/', async (req, res) => {
     await patente.save();
     
     res.send(patente);
+});
+
+router.delete('/', async (req, res) => {
+
 });
 
 module.exports = router;
