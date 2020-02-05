@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Patente, validatePatente } = require('../models/Patente');
+const { Patente, validatePatente, validarRegistro } = require('../models/Patente');
 
 router.get('/:code', async (req, res) => {
     let patentes = await Patente.find({ 'person.code': req.params.code });
@@ -36,7 +36,16 @@ router.post('/', async (req, res) => {
 });
 
 router.delete('/', async (req, res) => {
+    let { error } = validarRegistro(req.body);
+    if(error) return res.status(400).send(error.details[0].message);
 
+    let patente = await Patente.findOne({ registro: req.body.registro });
+    if(!patente) return res.status(400).send(`No existe una patente con registro: ${req.body.registro}`);
+
+    if(patente.person.code != req.body.code) return res.status(400).send('Acceso denegado.');
+
+    await patente.delete();
+    return res.send('Patente eliminada correctamente.');
 });
 
 module.exports = router;

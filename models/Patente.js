@@ -72,6 +72,16 @@ function isLetter(n) {
     return n.match("^[A-Za-z]");
 }
 
+function validarRegistro(registro){
+    let schema = Joi.object({
+        registro: Joi.string().max(9).required(),
+        code: Joi.string().max(20).required()
+    });
+
+    return schema.validate(registro);
+}
+
 module.exports.Patente = Patente;
 module.exports.validatePatente = validatePatente;
 module.exports.patenteSchema = patenteSchema;
+module.exports.validarRegistro = validarRegistro;
